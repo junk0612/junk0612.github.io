@@ -10,14 +10,12 @@ export type Slide = {
 export type SlideWithContent = Slide & { content: string }
 
 export const slides: Slide[] = [
-  /*
   {
     title: 'Blog つくりました',
     published: '2022/06/24',
     tags: ['JS', 'Next.js', 'Rust'],
     slug: 'new-blog',
   },
-  */
 ]
 
 export const useSlide = () => {
