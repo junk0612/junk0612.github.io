@@ -16,6 +16,12 @@ export const slides: Slide[] = [
     tags: ['JS', 'Next.js', 'Rust'],
     slug: 'new-blog',
   },
+  {
+    title: 'ふりかえり手法KPTAの紹介',
+    published: '2023/01/06',
+    tags: ['Agile', 'Retrospective'],
+    slug: 'about-kpta',
+  },
 ]
 
 export const useSlide = () => {
