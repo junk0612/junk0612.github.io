@@ -1,5 +1,5 @@
 import 'reveal.js/dist/reveal.css'
-import 'reveal.js/dist/theme/white.css'
+import 'reveal.js/dist/theme/beige.css'
 import 'reveal.js/plugin/highlight/zenburn.css'
 
 type Props = {
