@@ -33,6 +33,7 @@ const Menu: React.FC<MenuProps> = ({currentPath}) => {
     <ul className="flex gap-3 h-full">
       <MenuItem title="Blog" path="/posts" showPage={currentPath === 'posts'} />
       <MenuItem title="Slide" path="/slides" showPage={currentPath === 'slides' } />
+      <MenuItem title="Game" path="/games" showPage={currentPath === 'games' } />
       <MenuItem title="About" path="/about" showPage={currentPath === 'about'} />
     </ul>
   )
