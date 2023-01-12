@@ -1,6 +1,24 @@
 import { Game } from 'boardgame.io'
 import { INVALID_MOVE } from 'boardgame.io/core'
 
+export type GameInformation = {
+  title: string
+  published: string
+  tags: string[]
+  slug: string
+}
+
+export type GameWithContent = GameInformation & { content: string }
+
+export const games: GameInformation[] = [
+  {
+    title: 'TicTacToe',
+    published: '2023/01/13',
+    tags: ['2 people', 'PvP'],
+    slug: 'tictactoe',
+  },
+]
+
 export interface TicTacToeState {
   cells: (null | string)[]
 }
