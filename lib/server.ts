@@ -4,7 +4,7 @@ import { TicTacToe } from './game'
 
 const server = Server({
   games: [TicTacToe as Game],
-  origins: [Origins.LOCALHOST],
+  origins: ['*'],
 })
 
 server.run(Number(process.env['PORT']))
