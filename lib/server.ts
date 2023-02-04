@@ -7,4 +7,4 @@ const server = Server({
   origins: [Origins.LOCALHOST],
 })
 
-server.run(8000)
+server.run(Number(process.env['PORT']))
