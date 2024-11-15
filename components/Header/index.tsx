@@ -14,14 +14,14 @@ type MenuItemProps = {
 
 const MenuItem: React.FC<MenuItemProps> = ({path, showPage, title}) => {
   return (
-    <li
+    (<li
       className={
         'h-full flex flex-col justify-end border-black ' +
         (showPage ? 'pb-3 border-b-4' : 'pb-4')
       }
     >
-      <Link href={path}>{title}</Link>
-    </li>
+      <Link href={path} legacyBehavior>{title}</Link>
+    </li>)
   )
 }
 
@@ -42,8 +42,8 @@ export const Header: React.FC = () => {
   const router = useRouter()
 
   return (
-    <div className="top-0 bg-white w-full h-16 flex flex-row justify-between items-center px-4 border-b-2">
-      <Link href="/">
+    (<div className="top-0 bg-white w-full h-16 flex flex-row justify-between items-center px-4 border-b-2">
+      <Link href="/" legacyBehavior>
         <div className="flex items-center font-medium text-3xl h-full font-bold gap-4">
           <img
             className="rounded-full"
@@ -56,6 +56,6 @@ export const Header: React.FC = () => {
         </div>
       </Link>
       <Menu currentPath={router.asPath.split('/')[1]} />
-    </div>
+    </div>)
   )
 }
