@@ -10,12 +10,6 @@ export type Slide = {
 export type SlideWithContent = Slide & { content: string }
 
 export const slides: Slide[] = [
-  {
-    title: 'ふりかえりの紹介',
-    published: '2023/01/06',
-    tags: ['Agile', 'Retrospective'],
-    slug: 'about-kpta',
-  },
 ]
 
 export const useSlide = () => {
