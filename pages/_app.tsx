@@ -6,22 +6,22 @@ import Script from 'next/script'
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <div className="py-0 md:px-8 min-h-screen flex flex-col items-center">
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
+    <div className="min-h-screen flex flex-col items-center bg-gray-50 text-gray-800">
+      <div className="w-full max-w-4xl px-4">
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </div>
     </div>
   )
 }
 
 const Footer: React.FC = () => {
   return (
-    <div className="flex md:justify-center w-full">
-      <div className="flex flex-col md:max-w-4xl w-full">
-        <hr />
-        <div className="flex justify-center pt-4 pb-8">&#xA9; 2023 junk0612</div>
-      </div>
-    </div>
+    <footer className="w-full max-w-4xl px-4 text-center py-4 text-sm text-gray-600">
+      <hr className="border-gray-200" />
+      <p className="mt-4">&copy; 2025 junk0612</p>
+    </footer>
   )
 }
 
