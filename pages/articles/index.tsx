@@ -8,6 +8,7 @@ import { sortByPublishedDate } from '../../lib/sortByPublishedDate';
 import ArticleRepository from '../../lib/repositories/article';
 import { ArticleWithoutContent } from '../../lib/article';
 import { articlePath, articlesPagePath } from '../../lib/path';
+import { SITENAME } from '../../lib/constant';
 
 const perPage = 20;
 
@@ -43,7 +44,7 @@ const Articles: NextPage<Props> = ({ articles, pages, currentPage }) => {
   return (
     <>
       <Head>
-        <title>Articles | junk0612</title>
+        <title>Articles | {SITENAME}</title>
       </Head>
       <Layout>
         <h1 className="text-3xl mb-4">Articles</h1>
