@@ -1,4 +1,4 @@
-import { Tag } from '../Tag';
+import { Tag } from '../Tag'
 
 type Props = {
   tags: string[];
@@ -13,5 +13,5 @@ export const TagList: React.FC<Props> = ({ tags }) => {
         ))}
       </div>
     </nav>
-  );
-};
+  )
+}

@@ -1,16 +1,16 @@
-import { GetStaticProps, NextPage } from 'next';
-import Head from 'next/head';
-import { Layout } from '../../components/Layout';
-import { Pagination } from '../../components/Pagination';
-import { ContentList } from '../../components/ContentList';
-import { range } from '../../lib/range';
-import { sortByPublishedDate } from '../../lib/sortByPublishedDate';
-import ArticleRepository from '../../lib/repositories/article';
-import { ArticleWithoutContent } from '../../lib/article';
-import { articlePath, articlesPagePath } from '../../lib/path';
-import { SITENAME } from '../../lib/constant';
+import { GetStaticProps, NextPage } from 'next'
+import Head from 'next/head'
+import { Layout } from '../../components/Layout'
+import { Pagination } from '../../components/Pagination'
+import { ContentList } from '../../components/ContentList'
+import { range } from '../../lib/range'
+import { sortByPublishedDate } from '../../lib/sortByPublishedDate'
+import ArticleRepository from '../../lib/repositories/article'
+import { ArticleWithoutContent } from '../../lib/article'
+import { articlePath, articlesPagePath } from '../../lib/path'
+import { SITENAME } from '../../lib/constant'
 
-const perPage = 20;
+const perPage = 20
 
 type Props = {
   articles: ArticleWithoutContent[];
@@ -19,27 +19,27 @@ type Props = {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const currentPage = 1;
-  const articles = await ArticleRepository.list();
-  const sorted = sortByPublishedDate(articles);
+  const currentPage = 1
+  const articles = await ArticleRepository.list()
+  const sorted = sortByPublishedDate(articles)
   const sliced = sorted.slice(
     perPage * (currentPage - 1),
     perPage * currentPage
-  );
-  const maxPageNumer = Math.ceil(articles.length / 20);
-  const pages = range(maxPageNumer);
+  )
+  const maxPageNumer = Math.ceil(articles.length / 20)
+  const pages = range(maxPageNumer)
 
   return {
     props: { articles: sliced, currentPage, pages },
-  };
-};
+  }
+}
 
 const Articles: NextPage<Props> = ({ articles, pages, currentPage }) => {
   const entries = articles.map((article) => ({
     title: article.title,
     published: article.published,
     path: articlePath({ slug: article.slug }),
-  }));
+  }))
 
   return (
     <>
@@ -56,7 +56,7 @@ const Articles: NextPage<Props> = ({ articles, pages, currentPage }) => {
         />
       </Layout>
     </>
-  );
-};
+  )
+}
 
-export default Articles;
+export default Articles

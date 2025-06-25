@@ -1,4 +1,4 @@
-import { TagList } from '../TagList';
+import { TagList } from '../TagList'
 
 type Props = {
   title: string;
@@ -23,5 +23,5 @@ export const MarkdownContent: React.FC<Props> = ({
         <div className="znc" dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </article>
-  );
-};
+  )
+}

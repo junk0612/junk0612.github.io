@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 type Props = {
   currentPage: number;
@@ -25,5 +25,5 @@ export const Pagination: React.FC<Props> = ({
         )
       )}
     </div>
-  );
-};
+  )
+}

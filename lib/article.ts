@@ -4,6 +4,5 @@ export type Article = {
   tags: string[];
   content: string;
   slug: string;
-};
-
-export type ArticleWithoutContent = Omit<Article, 'content'>;
+}
+;export type ArticleWithoutContent = Omit<Article, 'content'>;
