@@ -1,9 +1,9 @@
-import { ContentWithoutBody } from './types'
+import { ContentWithoutBody } from './content'
 
 export function sortByPublishedDate(
   contents: ContentWithoutBody[]
 ): ContentWithoutBody[] {
   return contents.sort((a, b) => {
-    return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+    return new Date(b.published).getTime() - new Date(a.published).getTime()
   })
 }

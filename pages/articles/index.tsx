@@ -6,14 +6,14 @@ import { ContentList } from '../../components/ContentList'
 import { range } from '../../lib/range'
 import { sortByPublishedDate } from '../../lib/sortByPublishedDate'
 import ArticleRepository from '../../lib/repositories/article'
-import { ArticleWithoutContent } from '../../lib/article'
+import { ContentWithoutBody } from '../../lib/content'
 import { articlePath, articlesPagePath } from '../../lib/path'
 import { SITENAME } from '../../lib/constant'
 
 const perPage = 20
 
 type Props = {
-  articles: ArticleWithoutContent[];
+  articles: ContentWithoutBody[];
   currentPage: number;
   pages: number[];
 };

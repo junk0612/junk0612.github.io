@@ -2,11 +2,11 @@ import fs from 'fs'
 import { join } from 'path'
 import { getFiles } from '../getFiles'
 import matter from 'gray-matter'
-import { Article, ArticleWithoutContent } from '../article'
+import { Content, ContentWithoutBody } from '../content'
 
 const articleDir = join(process.cwd(), 'contents', 'articles')
 
-const list = async (): Promise<ArticleWithoutContent[]> => {
+const list = async (): Promise<ContentWithoutBody[]> => {
   const files = await getFiles(articleDir)
   return Promise.all(
     files.map(async (file) => {
@@ -16,25 +16,25 @@ const list = async (): Promise<ArticleWithoutContent[]> => {
   )
 }
 
-const listByTag = async (tag: string): Promise<ArticleWithoutContent[]> => {
+const listByTag = async (tag: string): Promise<ContentWithoutBody[]> => {
   const articles = await list()
   return articles.filter((article) => article.tags?.includes(tag))
 }
 
-const findByPath = async (path: string): Promise<Article> => {
+const findByPath = async (path: string): Promise<Content> => {
   const fileContents = fs.readFileSync(path, 'utf-8')
   const {
     data: { title, tags, published },
     content,
   } = matter(fileContents)
   const slug = path.split('/').splice(-1)[0].replace(/\.md$/, '')
-  return { title, published, tags: tags ?? [], content, slug } as Article
+  return { title, published, tags: tags ?? [], body: content, slug } as Content
 }
 
-const findBySlug = async (slug: string): Promise<Article> => {
+const findBySlug = async (slug: string): Promise<Content> => {
   return findByPath(join(articleDir, `${slug}.md`))
 }
 
-const ArticleRepository = { list, listByTag, findByPath, findBySlug }
+const ContentRepository = { list, listByTag, findByPath, findBySlug }
 
-export default ArticleRepository
+export default ContentRepository

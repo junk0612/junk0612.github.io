@@ -6,7 +6,7 @@ import { MarkdownContent } from '../../components/MarkdownContent'
 import { getFiles } from '../../lib/getFiles'
 import { markdownToHtml } from '../../lib/markdownToHtml'
 import ArticleRepository from '../../lib/repositories/article'
-import { Article } from '../../lib/article'
+import { Content } from '../../lib/content'
 import { SITENAME } from '../../lib/constant'
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -23,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 type Props = {
-  article: Article;
+  article: Content;
   content: string;
 };
 
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
   const article = await ArticleRepository.findBySlug(params!.slug)
-  const content = await markdownToHtml(article.content)
+  const content = await markdownToHtml(article.body)
 
   return {
     props: {
@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 }
 
 const Article: React.FC<Props> = ({ article, content }) => {
-  const description = article.content.replace(/[#\n]/g, '')?.slice(0, 160) || ''
+  const description = article.body.replace(/[#\n]/g, '')?.slice(0, 160) || ''
   const ogImage = `https://wat-aro.dev/og-images/${article.slug}.png`
   const { title, published, tags } = article
 
