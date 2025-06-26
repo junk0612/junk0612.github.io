@@ -5,7 +5,7 @@ import { Layout } from '../../components/Layout'
 import { MarkdownContent } from '../../components/MarkdownContent'
 import { getFiles } from '../../lib/getFiles'
 import { markdownToHtml } from '../../lib/markdownToHtml'
-import ArticleRepository from '../../lib/repositories/article'
+import ContentRepository from '../../lib/repositories/article'
 import { Content } from '../../lib/content'
 import { SITENAME } from '../../lib/constant'
 
@@ -34,7 +34,7 @@ type Params = {
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
-  const article = await ArticleRepository.findBySlug(params!.slug)
+  const article = await ContentRepository.findBySlug(params!.slug)
   const content = await markdownToHtml(article.body)
 
   return {
