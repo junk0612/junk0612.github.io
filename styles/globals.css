@@ -22,3 +22,17 @@ a {
 .reveal .slides p {
   text-align: left;
 }
+
+/* Code block styling */
+pre[class*="language-"] {
+  @apply rounded-lg shadow-md my-6 overflow-x-auto;
+}
+
+pre code {
+  @apply text-sm;
+}
+
+/* Inline code styling */
+:not(pre) > code {
+  @apply bg-gray-100 text-red-600 px-1 py-0.5 rounded text-sm;
+}
