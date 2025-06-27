@@ -15,7 +15,7 @@ export const Sidebar: React.FC<Props> = ({ recentArticles = [], allTags = [] }) 
       <section className="bg-white rounded-lg shadow-sm p-6">
         <h2 className="text-lg font-semibold mb-4">About</h2>
         <p className="text-sm text-gray-600">
-          junk0612のブログです。技術的な内容を中心に書いています。
+          Junichi Kobayashi(@junk0612)のサイトです。普段はRailsエンジニアをしています。LRパーサ・パーサジェネレータに強い興味があり、Ruby・Rails・パーサ関連を中心に技術的な内容を書いています。
         </p>
       </section>
 
@@ -47,9 +47,9 @@ export const Sidebar: React.FC<Props> = ({ recentArticles = [], allTags = [] }) 
         <h2 className="text-lg font-semibold mb-4">Links</h2>
         <ul className="space-y-2">
           <li>
-            <a 
-              href="https://twitter.com/junk0612" 
-              target="_blank" 
+            <a
+              href="https://twitter.com/junk0612"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
             >
@@ -57,13 +57,23 @@ export const Sidebar: React.FC<Props> = ({ recentArticles = [], allTags = [] }) 
             </a>
           </li>
           <li>
-            <a 
-              href="https://github.com/junk0612" 
-              target="_blank" 
+            <a
+              href="https://github.com/junk0612"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
             >
               GitHub
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://speakerdeck.com/junk0612"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+            >
+              Speaker Deck
             </a>
           </li>
         </ul>
