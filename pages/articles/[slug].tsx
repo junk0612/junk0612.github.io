@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Head from 'next/head'
 import { join } from 'path'
 import { Layout } from '../../components/Layout'
 import { MarkdownContent } from '../../components/MarkdownContent'
@@ -8,6 +7,7 @@ import { markdownToHtml } from '../../lib/markdownToHtml'
 import ContentRepository from '../../lib/repositories/article'
 import { Content } from '../../lib/content'
 import { SITENAME } from '../../lib/constant'
+import { SEO } from '../../components/SEO'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const articlesDir = join(process.cwd(), 'contents', 'articles')
@@ -46,20 +46,19 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 }
 
 const Article: React.FC<Props> = ({ article, content }) => {
-  const description = article.body.replace(/[#\n]/g, '')?.slice(0, 160) || ''
-  const ogImage = `https://wat-aro.dev/og-images/${article.slug}.png`
+  const description = article.body.replace(/[#\n]/g, '').replace(/\*\*/g, '').replace(/```[\s\S]*?```/g, '')?.slice(0, 160) || ''
   const { title, published, tags } = article
 
   return (
     <>
-      <Head>
-        <title>{title} | {SITENAME}</title>
-      </Head>
-      <Layout
-        title={`${title} | (wat-aro)`}
+      <SEO 
+        title={title}
         description={description}
-        ogImage={ogImage}
-      >
+        url={`https://junk0612.net/articles/${article.slug}`}
+        type="article"
+        publishedTime={published}
+      />
+      <Layout>
         <MarkdownContent
           title={title}
           published={published}

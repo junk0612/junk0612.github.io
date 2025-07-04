@@ -1,11 +1,10 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 import { Layout } from '../../components/Layout'
 import { MarkdownContent } from '../../components/MarkdownContent'
 import PostRepository from '../../lib/repositories/post'
 import { Content } from '../../lib/content'
-import { SITENAME } from '../../lib/constant'
 import { markdownToHtml } from '../../lib/markdownToHtml'
+import { SEO } from '../../components/SEO'
 
 type Props = {
   post: Content
@@ -31,11 +30,17 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 }
 
 const Post: NextPage<Props> = ({ post, content }) => {
+  const description = post.body.replace(/[#\n]/g, '').replace(/\*\*/g, '').replace(/```[\s\S]*?```/g, '')?.slice(0, 160) || ''
+  
   return (
     <>
-      <Head>
-        <title>{post.title} | {SITENAME}</title>
-      </Head>
+      <SEO 
+        title={post.title}
+        description={description}
+        url={`https://junk0612.net/posts/${post.slug}`}
+        type="article"
+        publishedTime={post.published}
+      />
       <Layout>
         <MarkdownContent 
           title={post.title}
