@@ -1,10 +1,9 @@
 import SlideRepository from '../../lib/repositories/slide'
 import { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 import { Layout } from '../../components/Layout'
 import { Entry } from '../../lib/entry'
 import { ContentList } from '../../components/ContentList'
-import { SITENAME } from '../../lib/constant'
+import { SEO } from '../../components/SEO'
 
 type Props = {
   slides: Entry[]
@@ -21,10 +20,12 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const Slides: NextPage<Props> = ({ slides }) => {
   return (
     <>
-      <Head>
-        <title>Slides | {SITENAME}</title>
-      </Head>
-      <Layout title="Slides" description="スライド一覧">
+      <SEO
+        title="Slides"
+        description="スライド一覧"
+        url="https://junk0612.net/slides"
+      />
+      <Layout>
         <h1 className="text-3xl mb-4">Slides</h1>
         <ContentList entries={slides} />
       </Layout>
