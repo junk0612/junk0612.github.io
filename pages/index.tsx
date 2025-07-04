@@ -1,11 +1,27 @@
 import Head from 'next/head'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 import { SITENAME } from '../lib/constant'
+import { Layout } from '../components/Layout'
+import { ContentList } from '../components/ContentList'
+import { ContentWithoutBody } from '../lib/content'
+import { Entry } from '../lib/entry'
+import ArticleRepository from '../lib/repositories/article'
+import SlideRepository from '../lib/repositories/slide'
+import { GetStaticProps } from 'next'
+import { articlePath } from '../lib/path'
 
-const inter = Inter({ subsets: ['latin'] })
+interface HomeProps {
+  articles: ContentWithoutBody[]
+  slides: Entry[]
+}
 
-export default function Home() {
+export default function Home({ articles, slides }: HomeProps) {
+  const articleEntries: Entry[] = articles.map((article) => ({
+    title: article.title,
+    published: article.published,
+    path: articlePath({ slug: article.slug }),
+  }))
+
   return (
     <>
       <Head>
@@ -14,107 +30,47 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <img
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-              />
-            </a>
+      <Layout>
+        <div className="mb-8">
+          <h2 className="text-2xl mb-4">Latest Articles</h2>
+          <ContentList entries={articleEntries} />
+          <div className="text-right mt-4">
+            <Link href="/articles" className="text-blue-600 hover:underline">
+              View all articles →
+            </Link>
           </div>
         </div>
 
-        <div className={styles.center}>
-          <img
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-          />
-          <div className={styles.thirteen}>
-            <img
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-            />
+        <div className="mb-8">
+          <h2 className="text-2xl mb-4">Latest Slides</h2>
+          <ContentList entries={slides} />
+          <div className="text-right mt-4">
+            <Link href="/slides" className="text-blue-600 hover:underline">
+              View all slides →
+            </Link>
           </div>
         </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+      </Layout>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const allArticles = await ArticleRepository.list()
+  const allSlides = await SlideRepository.list()
+  
+  const articles = allArticles
+    .sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime())
+    .slice(0, 5)
+    
+  const slides = allSlides
+    .sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime())
+    .slice(0, 5)
+
+  return {
+    props: {
+      articles,
+      slides,
+    },
+  }
 }

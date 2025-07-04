@@ -15,7 +15,7 @@ export const Sidebar: React.FC<Props> = ({ recentArticles = [], allTags = [] }) 
       <section className="bg-white rounded-lg shadow-sm p-6">
         <h2 className="text-lg font-semibold mb-4">About</h2>
         <p className="text-sm text-gray-600">
-          Junichi Kobayashi(@junk0612)のサイトです。普段はRailsエンジニアをしています。LRパーサ・パーサジェネレータに強い興味があり、Ruby・Rails・パーサ関連を中心に技術的な内容を書いています。
+          Junichi Kobayashi(@junk0612)のサイトです。普段はRailsエンジニアをしています。LRパーサ・パーサジェネレータに強い興味があり、Ruby・Rails・パーサ関連を中心に興味のある内容を書いています。
         </p>
       </section>
 
