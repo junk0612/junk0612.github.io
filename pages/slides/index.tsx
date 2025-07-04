@@ -1,3 +1,4 @@
+import React from 'react'
 import SlideRepository from '../../lib/repositories/slide'
 import { GetStaticProps, NextPage } from 'next'
 import { Layout } from '../../components/Layout'

@@ -48,6 +48,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 const Article: React.FC<Props> = ({ article, content }) => {
   const description = article.body.replace(/[#\n]/g, '').replace(/\*\*/g, '').replace(/```[\s\S]*?```/g, '')?.slice(0, 160) || ''
   const { title, published, tags } = article
+  
+  // Convert published date to ISO 8601 format
+  const publishedISO = new Date(published).toISOString()
 
   return (
     <>
@@ -56,7 +59,7 @@ const Article: React.FC<Props> = ({ article, content }) => {
         description={description}
         url={`https://junk0612.net/articles/${article.slug}`}
         type="article"
-        publishedTime={published}
+        publishedTime={publishedISO}
       />
       <Layout>
         <MarkdownContent

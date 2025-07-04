@@ -1,5 +1,4 @@
 import { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 import { Layout } from '../../components/Layout'
 import { Pagination } from '../../components/Pagination'
 import { ContentList } from '../../components/ContentList'
@@ -8,7 +7,7 @@ import { sortByPublishedDate } from '../../lib/sortByPublishedDate'
 import ArticleRepository from '../../lib/repositories/article'
 import { ContentWithoutBody } from '../../lib/content'
 import { articlePath, articlesPagePath } from '../../lib/path'
-import { SITENAME } from '../../lib/constant'
+import { SEO } from '../../components/SEO'
 
 const perPage = 20
 
@@ -43,9 +42,11 @@ const Articles: NextPage<Props> = ({ articles, pages, currentPage }) => {
 
   return (
     <>
-      <Head>
-        <title>Articles | {SITENAME}</title>
-      </Head>
+      <SEO
+        title="Articles"
+        description="技術記事一覧。プログラミング、パーサジェネレータ、Rubyなどの記事を投稿しています。"
+        url="https://junk0612.net/articles"
+      />
       <Layout>
         <h1 className="text-3xl mb-4">Articles</h1>
         <ContentList entries={entries} />

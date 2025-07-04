@@ -32,6 +32,9 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 const Post: NextPage<Props> = ({ post, content }) => {
   const description = post.body.replace(/[#\n]/g, '').replace(/\*\*/g, '').replace(/```[\s\S]*?```/g, '')?.slice(0, 160) || ''
   
+  // Convert published date to ISO 8601 format
+  const publishedISO = new Date(post.published).toISOString()
+  
   return (
     <>
       <SEO 
@@ -39,7 +42,7 @@ const Post: NextPage<Props> = ({ post, content }) => {
         description={description}
         url={`https://junk0612.net/posts/${post.slug}`}
         type="article"
-        publishedTime={post.published}
+        publishedTime={publishedISO}
       />
       <Layout>
         <MarkdownContent 
